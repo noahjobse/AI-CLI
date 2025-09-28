@@ -43,7 +43,8 @@ When answering:
 - Organize information into clean lists, steps, or bullet points when it helps readability.
 - Show code examples in fenced code blocks with the right language tag.
 - Don’t overdo structure like JSON/YAML unless I specifically request it.
-- Keep reasoning out of your replies — just give me the final answer.
+- Do NOT put links inline in the body of the answer. 
+- If you use web search or include external sources, always collect all URLs and list them at the very end under a section titled "References:", as plain URLs only.
 
 In short: be practical, concise, and conversational — like a sharp assistant who knows when to be brief and when to expand if I ask.
 """
@@ -74,7 +75,7 @@ In short: be practical, concise, and conversational — like a sharp assistant w
                     stream=True,
                     reasoning={"effort": "low"},
                     text={"verbosity": "low"},
-                    tools=[{"type": "web_search"}],
+                    tools=[{"type": "web_search"}],  # Web search enabled
                 )
 
                 first_token_printed = False
@@ -87,14 +88,12 @@ In short: be practical, concise, and conversational — like a sharp assistant w
                             console.print("\n🤖 [bold green]Assistant:[/bold green]\n")
                             first_token_printed = True
 
-                        # Smooth typing effect
-                        for ch in event.delta:
-                            sys.stdout.write(ch)
-                            sys.stdout.flush()
-                            time.sleep(0.005)
+                        sys.stdout.write(event.delta)
+                        sys.stdout.flush()
+                        time.sleep(0.005)
                         assistant_response += event.delta
 
-                    # --- End of text (fix for pause) ---
+                    # --- End of text ---
                     elif event.type == "response.output_text.done":
                         sys.stdout.write("\n")
                         sys.stdout.flush()
