@@ -1,4 +1,4 @@
-# ai_tui/core/openai_client.py
+# core/openai_client.py
 import os
 import sys
 import time

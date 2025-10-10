@@ -1,4 +1,4 @@
-# ai_tui/ui/input_bar.py
+# ui/input_bar.py
 from textual.widget import Widget
 from textual.message import Message
 from textual.widgets import Input

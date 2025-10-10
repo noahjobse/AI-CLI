@@ -6,11 +6,11 @@ from textual.containers import Vertical
 from dotenv import load_dotenv
 
 # ✅ Core imports
-from ai_tui.ui.chat_view import ChatView
-from ai_tui.ui.input_bar import InputBar
-from ai_tui.ui.status_bar import StatusBar
-from ai_tui.core.openai_client import stream_response
-from ai_tui.core.session import Session
+from ui.chat_view import ChatView
+from ui.input_bar import InputBar
+from ui.status_bar import StatusBar
+from core.openai_client import stream_response
+from core.session import Session
 
 
 class AITui(App):

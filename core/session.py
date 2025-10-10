@@ -1,4 +1,4 @@
-# ai_tui/core/session.py
+# core/session.py
 from datetime import datetime
 
 

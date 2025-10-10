@@ -19,7 +19,7 @@ venv/
 env/
 
 # === Textual / Rich artifacts ===
-.ai_tui/ui/__pycache__/
+.ui/__pycache__/
 
 # === OS / Editor junk ===
 .DS_Store
