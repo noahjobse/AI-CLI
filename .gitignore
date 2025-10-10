@@ -1,2 +1,33 @@
+# === Environment & credentials ===
 .env
-sessions
+*.env
+
+# === Python cache ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# === Local sessions & logs ===
+sessions/
+logs/
+*.log
+
+# === Virtual environment ===
+.venv/
+venv/
+env/
+
+# === Textual / Rich artifacts ===
+.ai_tui/ui/__pycache__/
+
+# === OS / Editor junk ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# === Build / dist output ===
+build/
+dist/
+*.egg-info/
