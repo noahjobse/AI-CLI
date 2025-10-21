@@ -13,7 +13,6 @@ class ChatRow(Static):
         self.role = role
         self.text = text
         color = {"USER": "cyan", "ASSISTANT": "green", "TOOL": "yellow"}.get(role, "white")
-        # ✅ Render immediately (previously missing)
         self.update(Panel(Markdown(self.text), title=self.role, border_style=color))
 
     def update_text(self, new_text: str):
@@ -40,7 +39,7 @@ class ChatView(VerticalScroll):
         """Add user message and preserve all history."""
         row = ChatRow("USER", text)
         await self.mount(row)
-        self.scroll_end(animate=False)  # ✅ Removed 'await' — it's not async
+        self.scroll_end(animate=False)
         self.current_assistant_row = None
 
     def start_assistant(self):
@@ -49,12 +48,20 @@ class ChatView(VerticalScroll):
         self.mount(self.current_assistant_row)
         self.scroll_end(animate=False)
 
-    def update_assistant(self, text: str):
+    def update_assistant(self, text: str, append: bool = False):
         """Stream assistant updates into the active row."""
         if not self.current_assistant_row:
             self.start_assistant()
-        self.current_assistant_row.update_text(text)
-        self.last_assistant = text
+
+        if append:
+            # Append text chunk to the existing message
+            new_text = self.current_assistant_row.text + text
+        else:
+            # Replace the entire message
+            new_text = text
+
+        self.current_assistant_row.update_text(new_text)
+        self.last_assistant = new_text
         self.scroll_end(animate=False)
 
     def clear(self):

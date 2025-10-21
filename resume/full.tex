@@ -1,0 +1,206 @@
+%-------------------------
+% Resume in Latex
+% Author : Noah Jobse
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+  }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure ATS readable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{\item\small{#1}}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+      \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+            \textbf{#1} & #2 \\
+                  \textit{\small#3} & \textit{\small #4} \\
+                      \end{tabular*}\vspace{-7pt}
+                      }
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Noah Jobse} \\ \vspace{1pt}
+    Calgary AB \\ 
+    \small \href{mailto:noahjobse@gmail.com}{noahjobse@gmail.com} \\
+    GitHub: \href{https://github.com/noahjobse}{github.com/noahjobse} \quad
+    Portfolio: \href{https://noahjobse.vercel.app}{noahjobse.vercel.app} \quad
+    LinkedIn: \href{https://linkedin.com/in/noah-jobse}{linkedin.com/in/noah-jobse}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small
+Curious and motivated software developer pivoting from construction leadership into full-stack development. Currently in the 3rd year of the BTech in Software Development at SAIT, building user-focused applications with React, Next.js, Node.js, and Supabase.
+
+%-----------EDUCATION-----------
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {Southern Alberta Institute of Technology}{Calgary AB}
+    {Bachelor of Technology in Software Development, GPA 3.6}{Expected Dec 2026}
+      \resumeItemListStart
+        \resumeItem{\textbf{Capstone Project:} CloudInsights.ai — earned A+ and Academic Chair commendation.}
+        \resumeItem{\textbf{Relevant Coursework:} Algorithms and Data Structures, Object-Oriented Design, Web Development, Database Design and Programming, Software Testing and Deployment, Software Security, Cloud Computing, Operating Systems, Emerging Trends in Software Development.}
+      \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+%-----------SKILLS-----------
+\section{Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+\small
+  \item \textbf{Languages:} TypeScript, JavaScript, Python, Java, SQL
+  \item \textbf{Frontend:} React, Next.js, Tailwind CSS
+  \item \textbf{Backend:} Node.js, Express.js, Flask, Spring Boot, REST, GraphQL
+  \item \textbf{Databases:} PostgreSQL, Supabase, Firestore, MySQL, SQLite, Pinecone
+  \item \textbf{DevOps and Cloud:} Git, Docker, CI/CD, Firebase Hosting, Vercel, AWS, Azure
+  \item \textbf{Testing:} Jest, Playwright, GitHub Actions, Postman
+  \item \textbf{Tools:} Jira, Trello, Teams, VS Code, IntelliJ, Figma
+  \item \textbf{AI and Data:} OpenAI SDK, LangChain, LangGraph
+\end{itemize}
+
+%-----------PROJECTS-----------
+\section{Projects}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+  {CloudInsights.ai — Full Stack Financial Analytics}{2025}
+  {Next.js 15, TypeScript, Zustand, Zod, Jest, Playwright, Vercel, Supabase}{}
+  \resumeItemListStart
+    \resumeItem{Developed a SaaS financial analytics platform with interactive dashboards, KPI summaries, and variance reporting.}
+    \resumeItem{Implemented an ETL pipeline for QuickBooks Online OAuth2 data, transforming raw business data into schema-validated profit and loss records with Zod.}
+    \resumeItem{Optimized deployment with Vercel caching and monitoring, sustaining 95\%+ Lighthouse performance scores.}
+    \resumeItem{Built a comprehensive testing suite with Jest and Playwright, increasing coverage above 60\%.}
+    \resumeItem{Recognized with A+ grade and Academic Chair commendation at SAIT CapCon 2025.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Client Web Development Projects — Freelance}{2025}
+  {Next.js, TypeScript, Tailwind, Shopify GraphQL, Firestore}{}
+  \resumeItemListStart
+    \resumeItem{Launched production websites with optimized Next.js pipelines, achieving 95\%+ Lighthouse scores and first-page SEO rankings.}
+    \resumeItem{Built advanced quote form with Resend integration on Urban Clean Living, improving asset-handling efficiency by 60\% and increasing submissions by 35\%.}
+    \resumeItem{Developed pickup-only storefront with Shopify GraphQL and Zustand cart on BulkBuy, reducing load time by 40\%.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {AI-CLI — Local AI Automation Tool}{2025}
+  {TypeScript, Node.js, OpenAI SDK, LangChain, Shell CLI Utilities}{}
+  \resumeItemListStart
+    \resumeItem{Developed a local OpenAI SDK command-line tool with token tracking, caching, and prompt optimization to replace commercial AI chat interfaces.}
+    \resumeItem{Reduced GPT API usage by approximately 40 percent through local caching and prompt reuse while maintaining full compatibility with GPT workflows.}
+    \resumeItem{Automated repetitive development and documentation queries directly from the terminal, saving 1–2 hours of manual work each week.}
+    \resumeItem{Eliminated paid AI subscriptions, achieving roughly 75 percent annual cost savings and complete workflow autonomy.}
+    \resumeItem{Built a modular, extensible CLI architecture supporting configurable models, context injection, and offline-first operation for reproducible, low-cost automation.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {RAG-CLI — AI Documentation Assistant}{2025}
+  {TypeScript, Node.js, LangChain, LangGraph, Pinecone, OpenAI SDK}{}
+  \resumeItemListStart
+    \resumeItem{Engineered a modular RAG command-line interface for querying and summarizing web or local documentation, integrating LangChain, LangGraph, and GPT-4o mini for structured retrieval and generation.}
+    \resumeItem{Implemented dual ingestion pipelines using WebBaseLoader and DirectoryLoader with recursive text splitting and embeddings from text-embedding-3-large, enabling instant context-aware responses.}
+    \resumeItem{Automated document summarization and retrieval, eliminating 3–4 hours of manual documentation lookup per week and improving developer throughput and comprehension accuracy.}
+    \resumeItem{Designed flexible CLI architecture supporting both interactive and single-query modes with flags such as --urls, --folder, --interactive, and --question, optimized for reproducibility and local-first operation.}
+    \resumeItem{Removed dependency on cloud subscriptions, achieving a fully offline workflow with zero recurring cost and enhanced data privacy.}
+  \resumeItemListEnd
+
+
+\resumeSubheading
+  {Python Automation Projects}{2024--2025}
+  {Python, Pandas, APIs, Web Scraping, OpenAI}{}
+  \resumeItemListStart
+    \resumeItem{Contact Enrichment Automation: Queried Google Custom Search API and GPT to extract manager names and titles from snippets and update Excel datasets automatically.}
+    \resumeItem{Phone Number Lookup Automation: Integrated Google Places API to enrich business records with verified phone numbers, including error handling and rate limiting.}
+    \resumeItem{Web Search and Site Crawler: Combined Brave Search API with BeautifulSoup to locate company websites, crawl internal pages, and extract visible text.}
+    \resumeItem{Semi-Automated Contact Entry Tool: Built a CLI workflow to prompt for missing contact details, parse entries, and incrementally save structured updates in Excel.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Work Experience}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+  {Freelance and Client Web Development}{2025}
+  {Hybrid — Calgary AB}{}
+  \resumeItemListStart
+    \resumeItem{Achieved 100 Real Experience Score by optimizing images with Next.js and minimizing animations, reducing load times under one second.}
+    \resumeItem{Improved Lighthouse metrics through CI/CD tracking and performance budget tuning, maintaining consistent 95\%+ scores.}
+    \resumeItem{Delivered responsive, maintainable apps using Next.js, Tailwind CSS, and Node.js, enabling clients to launch faster and scale efficiently.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Bolt Supply House}{2022--2024}
+  {Calgary AB}{}
+  \resumeItemListStart
+    \resumeItem{Increased inventory processing speed by 16.7 percent through workflow optimization while maintaining high accuracy across all orders.}
+    \resumeItem{Enhanced IT infrastructure by partnering with the IT team on network and cloud system upgrades, improving system reliability.}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Beyond Group}{2021--2022}
+  {Calgary AB}{}
+  \resumeItemListStart
+    \resumeItem{Led crews of two to four workers to deliver projects at 115 percent efficiency, surpassing productivity targets.}
+    \resumeItem{Reduced onboarding time by training new employees on safety compliance and process improvements, improving retention.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%-----------COMMUNITY-----------
+\section{Community and Recognition}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {CapCon 2025 — SAIT}{2025}
+    {Presenter, CloudInsights.ai}{}
+    \resumeItemListStart
+      \resumeItem{Commended for excellent product direction and execution.}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+%-------------------------------------------
+\end{document}
