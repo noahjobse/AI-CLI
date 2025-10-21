@@ -89,9 +89,11 @@ class ResumeHandler:
             # --- Export refined LaTeX ---
             export_dir = Path("exports/resumes")
             export_dir.mkdir(parents=True, exist_ok=True)
+
             safe_company = "".join(c for c in company_name if c.isalnum() or c in ("-", "_")).strip() or "Generic"
-            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            export_path = export_dir / f"refined_{safe_company}_{timestamp}.tex"
+            filename_base = f"NoahJobse_Resume_2025_{safe_company}"
+
+            export_path = export_dir / f"{filename_base}.tex"
             export_path.write_text(refined_output, encoding="utf-8")
 
             self.chat.start_assistant()
@@ -103,13 +105,13 @@ class ResumeHandler:
             self.chat.start_assistant()
             self.chat.update_assistant("⚙️ Compiling to PDF...")
 
-            pdf_path = export_path.with_suffix(".pdf")
+            pdf_path = export_dir / f"{filename_base}.pdf"
             compile_result = subprocess.run(
                 [
                     "pdflatex",
                     "-interaction=nonstopmode",
                     "-output-directory",
-                    str(export_path.parent),
+                    str(export_dir),
                     str(export_path),
                 ],
                 capture_output=True,
