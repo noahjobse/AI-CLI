@@ -1,5 +1,7 @@
 # core/resume_handler.py
 import os
+import platform
+import subprocess
 from pathlib import Path
 from datetime import datetime
 from core.resume_refiner import extract_company_name, SYSTEM_PROMPT
@@ -9,7 +11,7 @@ load_dotenv()
 
 
 class ResumeHandler:
-    """Handles resume refinement workflow (Responses API streaming + streamed summary + export)."""
+    """Handles resume refinement workflow (Responses API streaming + summary + export + compile)."""
 
     def __init__(self, app):
         self.app = app
@@ -38,7 +40,7 @@ class ResumeHandler:
             self.app._resume_input_state = "waiting_for_resume_path"
 
     async def process_resume_refinement(self, resume_path_str: str, job_description: str):
-        """Stream refined LaTeX to chat using official semantic event model, stream concise summary, then export."""
+        """Stream refined LaTeX → export → compile → summarize."""
         client = self.openai_client
         MODEL = self.model
 
@@ -84,15 +86,12 @@ class ResumeHandler:
             self.status.toast("Resume refinement complete ✓")
             await self.app.logger.log("INFO", "Resume refinement stream completed")
 
-            # --- Export the refined LaTeX to /exports/resumes ---
+            # --- Export refined LaTeX ---
             export_dir = Path("exports/resumes")
             export_dir.mkdir(parents=True, exist_ok=True)
-
-            # Sanitize filename (no spaces or special chars)
             safe_company = "".join(c for c in company_name if c.isalnum() or c in ("-", "_")).strip() or "Generic"
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             export_path = export_dir / f"refined_{safe_company}_{timestamp}.tex"
-
             export_path.write_text(refined_output, encoding="utf-8")
 
             self.chat.start_assistant()
@@ -100,7 +99,51 @@ class ResumeHandler:
             self.status.toast("Refined LaTeX exported ✓")
             await self.app.logger.log("INFO", f"Refined LaTeX exported to {export_path}")
 
-            # --- Stream concise post-analysis summary ---
+            # --- Compile to PDF ---
+            self.chat.start_assistant()
+            self.chat.update_assistant("⚙️ Compiling to PDF...")
+
+            pdf_path = export_path.with_suffix(".pdf")
+            compile_result = subprocess.run(
+                [
+                    "pdflatex",
+                    "-interaction=nonstopmode",
+                    "-output-directory",
+                    str(export_path.parent),
+                    str(export_path),
+                ],
+                capture_output=True,
+                text=True,
+            )
+
+            if compile_result.returncode == 0 and pdf_path.exists():
+                self.chat.start_assistant()
+                self.chat.update_assistant(f"📄 **Compiled PDF generated!**\n`{pdf_path}`")
+
+                # --- Cleanup temp LaTeX artifacts (.aux, .log, etc.) ---
+                for ext in [".aux", ".log", ".out", ".toc"]:
+                    aux_file = export_path.with_suffix(ext)
+                    if aux_file.exists():
+                        aux_file.unlink()
+
+                # --- Open PDF in default viewer ---
+                try:
+                    system = platform.system()
+                    if system == "Windows":
+                        os.startfile(pdf_path)
+                    elif system == "Darwin":
+                        subprocess.run(["open", pdf_path])
+                    else:
+                        subprocess.run(["xdg-open", pdf_path])
+                    self.status.toast("PDF opened ✓")
+                    await self.app.logger.log("INFO", f"PDF compiled and opened: {pdf_path}")
+                except Exception as open_err:
+                    self.chat.update_assistant(f"⚠️ Could not open PDF: {open_err}")
+            else:
+                self.chat.update_assistant("⚠️ PDF compilation failed.")
+                await self.app.logger.log("ERROR", compile_result.stderr)
+
+            # --- Stream concise summary ---
             self.chat.start_assistant()
             self.chat.update_assistant("🧾 Summarizing key improvements...\n")
 
@@ -108,7 +151,7 @@ class ResumeHandler:
                 "Summarize the main differences between the original and refined resume "
                 "in 3–5 short bullet points. Focus only on concrete improvements — "
                 "quantification, relevance to company, clarity, and tone. "
-                f"Make it concise for {company_name}. Output only bullets starting with '• '."
+                f"Make it concise for {company_name}. Output only bullets starting with '• '"
             )
 
             summary_output = ""
@@ -135,8 +178,7 @@ class ResumeHandler:
                     elif etype == "response.completed":
                         break
 
-            # --- Final completion toast ---
-            self.status.toast("✅ All steps complete — ready to compile")
+            self.status.toast("✅ All steps complete — PDF ready and summary displayed.")
             await self.app.logger.log("INFO", f"Summary complete for {company_name}")
 
         except Exception as e:
