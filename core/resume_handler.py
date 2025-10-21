@@ -1,6 +1,7 @@
 # core/resume_handler.py
 import os
 from pathlib import Path
+from datetime import datetime
 from core.resume_refiner import extract_company_name, SYSTEM_PROMPT
 from dotenv import load_dotenv
 
@@ -8,7 +9,7 @@ load_dotenv()
 
 
 class ResumeHandler:
-    """Handles resume refinement workflow (Responses API streaming + streamed summary)."""
+    """Handles resume refinement workflow (Responses API streaming + streamed summary + export)."""
 
     def __init__(self, app):
         self.app = app
@@ -37,7 +38,7 @@ class ResumeHandler:
             self.app._resume_input_state = "waiting_for_resume_path"
 
     async def process_resume_refinement(self, resume_path_str: str, job_description: str):
-        """Stream refined LaTeX to chat using official semantic event model, then stream concise summary."""
+        """Stream refined LaTeX to chat using official semantic event model, stream concise summary, then export."""
         client = self.openai_client
         MODEL = self.model
 
@@ -78,9 +79,26 @@ class ResumeHandler:
                     elif etype == "response.completed":
                         break
 
+            # --- Finish stream cleanly ---
             self.chat.update_assistant("\n```", append=True)
             self.status.toast("Resume refinement complete ✓")
             await self.app.logger.log("INFO", "Resume refinement stream completed")
+
+            # --- Export the refined LaTeX to /exports/resumes ---
+            export_dir = Path("exports/resumes")
+            export_dir.mkdir(parents=True, exist_ok=True)
+
+            # Sanitize filename (no spaces or special chars)
+            safe_company = "".join(c for c in company_name if c.isalnum() or c in ("-", "_")).strip() or "Generic"
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            export_path = export_dir / f"refined_{safe_company}_{timestamp}.tex"
+
+            export_path.write_text(refined_output, encoding="utf-8")
+
+            self.chat.start_assistant()
+            self.chat.update_assistant(f"💾 Exported refined LaTeX to:\n`{export_path}`")
+            self.status.toast("Refined LaTeX exported ✓")
+            await self.app.logger.log("INFO", f"Refined LaTeX exported to {export_path}")
 
             # --- Stream concise post-analysis summary ---
             self.chat.start_assistant()
@@ -117,8 +135,9 @@ class ResumeHandler:
                     elif etype == "response.completed":
                         break
 
-            self.status.toast("Summary ready ✓")
-            await self.app.logger.log("INFO", "Streaming summary completed successfully")
+            # --- Final completion toast ---
+            self.status.toast("✅ All steps complete — ready to compile")
+            await self.app.logger.log("INFO", f"Summary complete for {company_name}")
 
         except Exception as e:
             self.chat.update_assistant(f"⚠️ Unexpected error during streaming: {e}")
