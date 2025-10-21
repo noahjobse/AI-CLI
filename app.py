@@ -6,9 +6,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 from textual.app import App, ComposeResult
 from textual.containers import Vertical
-from openai import AsyncOpenAI  # ✅ async client
+from openai import AsyncOpenAI  #  async client
 
-# ✅ Core imports
+#  Core imports
 from ui.chat_view import ChatView
 from ui.input_bar import InputBar
 from ui.status_bar import StatusBar
@@ -46,7 +46,7 @@ class AITui(App):
         """Initialize app resources and logger."""
         load_dotenv()
 
-        # ✅ Require model and API key from environment
+        #  Require model and API key from environment
         self.model = os.environ["OPENAI_MODEL"]
         api_key = os.environ["OPENAI_API_KEY"]
 
@@ -65,7 +65,7 @@ class AITui(App):
         # Create session log
         os.makedirs("sessions", exist_ok=True)
         ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        self.log_path = f"sessions/session_{ts}.md"
+        self.log_path = f"logs/sessions/session_{ts}.md"
         with open(self.log_path, "w", encoding="utf-8") as f:
             f.write(f"# Session started {datetime.now()}\n\n")
 
@@ -141,7 +141,7 @@ class AITui(App):
     async def _stream_openai(self, messages):
         """True async streaming via the Responses API."""
         async with self.openai_client.responses.stream(
-            model=self.model,  # ✅ pulled directly from .env
+            model=self.model,  #  pulled directly from .env
             input=messages,
         ) as stream:
             async for event in stream:

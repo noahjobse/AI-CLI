@@ -12,7 +12,7 @@ class StatusBar(Static):
     """Shows model, tokens, cost, and status messages."""
 
     def on_mount(self):
-        # ✅ Use model from environment (strictly required)
+        #  Use model from environment (strictly required)
         self._model = os.environ["OPENAI_MODEL"]
         self._logfile = "sessions/..."
         self._prompt_tokens = 0

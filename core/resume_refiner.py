@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 # --- Load environment variables ---
 load_dotenv()
 
-# ✅ Require explicit API key and model
+#  Require explicit API key and model
 API_KEY = os.environ["OPENAI_API_KEY"]
 MODEL = os.environ["OPENAI_MODEL"]
 
@@ -28,7 +28,7 @@ Rules:
 """
 
 # ============================================================
-# ✅ Resume refinement using the Responses API
+#  Resume refinement using the Responses API
 # ============================================================
 
 async def refine_resume(latex_text: str, job_description: str) -> str:
@@ -62,7 +62,7 @@ async def refine_resume(latex_text: str, job_description: str) -> str:
 
 
 # ============================================================
-# ✅ Utility functions
+#  Utility functions
 # ============================================================
 
 def extract_company_name(jd: str) -> str:

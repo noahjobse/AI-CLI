@@ -5,11 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ✅ Require API key and model explicitly from environment
+#  Require API key and model explicitly from environment
 API_KEY = os.environ["OPENAI_API_KEY"]
 MODEL = os.environ["OPENAI_MODEL"]
 
-# ✅ Initialize async client
+#  Initialize async client
 client = AsyncOpenAI(api_key=API_KEY)
 
 

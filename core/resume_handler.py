@@ -17,7 +17,7 @@ class ResumeHandler:
         self.openai_client = app.openai_client
         self.DEFAULT_RESUME_PATH = app.DEFAULT_RESUME_PATH
 
-        # ✅ Require model explicitly from environment
+        #  Require model explicitly from environment
         self.model = os.environ["OPENAI_MODEL"]
 
     async def handle_resume_command(self):
@@ -41,7 +41,7 @@ class ResumeHandler:
     async def process_resume_refinement(self, resume_path_str: str, job_description: str):
         """Stream refined LaTeX to chat using official semantic event model."""
         client = self.openai_client
-        MODEL = self.model  # ✅ from environment
+        MODEL = self.model  #  from environment
 
         try:
             resume_path = Path(resume_path_str)
@@ -66,7 +66,7 @@ class ResumeHandler:
                         "content": f"Job Description:\n{job_description}\n\nResume:\n{latex_text}",
                     },
                 ],
-                reasoning={"effort": "low"},  # ✅ Faster, minimal reasoning
+                reasoning={"effort": "low"},  #  Faster, minimal reasoning
             ) as stream:
                 async for event in stream:
                     etype = getattr(event, "type", None)
