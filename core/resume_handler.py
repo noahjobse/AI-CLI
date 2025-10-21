@@ -1,5 +1,10 @@
+# core/resume_handler.py
+import os
 from pathlib import Path
 from core.resume_refiner import extract_company_name, SYSTEM_PROMPT
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class ResumeHandler:
@@ -11,6 +16,9 @@ class ResumeHandler:
         self.status = app.status
         self.openai_client = app.openai_client
         self.DEFAULT_RESUME_PATH = app.DEFAULT_RESUME_PATH
+
+        # ✅ Require model explicitly from environment
+        self.model = os.environ["OPENAI_MODEL"]
 
     async def handle_resume_command(self):
         """Entry point when user types :resume."""
@@ -29,7 +37,7 @@ class ResumeHandler:
     async def process_resume_refinement(self, resume_path_str: str, job_description: str):
         """Stream refined LaTeX to chat using official semantic event model."""
         client = self.openai_client
-        MODEL = "gpt-5"
+        MODEL = self.model  # ✅ from environment
 
         try:
             resume_path = Path(resume_path_str)
@@ -37,15 +45,14 @@ class ResumeHandler:
                 self.chat.update_assistant(f"❌ Error: Resume file not found at {resume_path}")
                 return
 
-            # Read the LaTeX resume
+            # Load LaTeX text
             latex_text = resume_path.read_text(encoding="utf-8")
             company_name = extract_company_name(job_description)
 
-            # Start the assistant message
             self.chat.start_assistant()
             self.chat.update_assistant(f"🧠 Refining resume for **{company_name}**...\n```latex")
 
-            # ✅ Correct official streaming pattern
+            # --- Official streaming request with low reasoning effort ---
             async with client.responses.stream(
                 model=MODEL,
                 input=[
@@ -55,24 +62,19 @@ class ResumeHandler:
                         "content": f"Job Description:\n{job_description}\n\nResume:\n{latex_text}",
                     },
                 ],
+                reasoning={"effort": "low"},  # ✅ Faster, minimal reasoning
             ) as stream:
-
                 async for event in stream:
                     etype = getattr(event, "type", None)
 
                     if etype == "response.output_text.delta":
-                        # Append each partial output as it streams
                         self.chat.update_assistant(event.delta, append=True)
-
                     elif etype == "error":
-                        # Handle streaming error
                         self.chat.update_assistant(f"\n% ERROR: {event.error.message}\n")
-
                     elif etype == "response.completed":
-                        # Model completed its output
                         break
 
-            # ✅ Clean exit (context auto-closes)
+            # --- Finish stream cleanly ---
             self.chat.update_assistant("\n```")
             self.status.toast("Resume refinement complete ✓")
 

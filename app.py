@@ -1,3 +1,4 @@
+# app.py
 import os
 import asyncio
 from datetime import datetime
@@ -5,7 +6,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from textual.app import App, ComposeResult
 from textual.containers import Vertical
-from openai import AsyncOpenAI  # ✅ switched to async client
+from openai import AsyncOpenAI  # ✅ async client
 
 # ✅ Core imports
 from ui.chat_view import ChatView
@@ -44,17 +45,22 @@ class AITui(App):
     async def on_mount(self):
         """Initialize app resources and logger."""
         load_dotenv()
+
+        # ✅ Require model and API key from environment
+        self.model = os.environ["OPENAI_MODEL"]
+        api_key = os.environ["OPENAI_API_KEY"]
+
         self.session = Session()
-        self.openai_client = AsyncOpenAI()  # ✅ async client
+        self.openai_client = AsyncOpenAI(api_key=api_key)
         self.command_handler = CommandHandler(self)
         self.input.focus()
 
         # Initialize async event logger
         self.logger = AsyncEventLogger()
         await self.logger.start()
-        await self.logger.log("INFO", "TUI started ✓")
+        await self.logger.log("INFO", f"TUI started ✓ | Model: {self.model}")
 
-        self.status.toast("TUI started ✓")
+        self.status.toast(f"TUI started ✓ | {self.model}")
 
         # Create session log
         os.makedirs("sessions", exist_ok=True)
@@ -107,8 +113,8 @@ class AITui(App):
         # --- Regular Chat ---
         await self.chat.add_user(text)
         self.session.add_user(text)
-        self.status.toast("🤖 Generating...")
-        await self.logger.log("INFO", "OpenAI response stream started")
+        self.status.toast(f"🤖 Generating... ({self.model})")
+        await self.logger.log("INFO", f"OpenAI response stream started ({self.model})")
 
         assistant_text = ""
         self.chat.start_assistant()
@@ -135,7 +141,7 @@ class AITui(App):
     async def _stream_openai(self, messages):
         """True async streaming via the Responses API."""
         async with self.openai_client.responses.stream(
-            model=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
+            model=self.model,  # ✅ pulled directly from .env
             input=messages,
         ) as stream:
             async for event in stream:

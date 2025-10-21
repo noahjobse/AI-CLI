@@ -1,3 +1,4 @@
+# core/resume_refiner.py
 import os
 import re
 import subprocess
@@ -9,9 +10,12 @@ from dotenv import load_dotenv
 # --- Load environment variables ---
 load_dotenv()
 
-# --- Initialize client using your API key from the environment ---
-client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-MODEL = os.getenv("OPENAI_MODEL", "gpt-5")  # defaults to gpt-5 if unset
+# ✅ Require explicit API key and model
+API_KEY = os.environ["OPENAI_API_KEY"]
+MODEL = os.environ["OPENAI_MODEL"]
+
+# --- Initialize async client ---
+client = AsyncOpenAI(api_key=API_KEY)
 
 SYSTEM_PROMPT = """You are a professional technical resume editor.
 Refine the given LaTeX resume based on the provided job description.

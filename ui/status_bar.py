@@ -1,13 +1,19 @@
-from textual.widgets import Static
-from rich.text import Text
+# ui/status_bar.py
+import os
 from time import time
+from rich.text import Text
+from textual.widgets import Static
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class StatusBar(Static):
     """Shows model, tokens, cost, and status messages."""
 
     def on_mount(self):
-        self._model = "gpt-5-mini"
+        # ✅ Use model from environment (strictly required)
+        self._model = os.environ["OPENAI_MODEL"]
         self._logfile = "sessions/..."
         self._prompt_tokens = 0
         self._completion_tokens = 0

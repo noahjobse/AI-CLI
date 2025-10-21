@@ -5,9 +5,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Initialize async client
-client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+# ✅ Require API key and model explicitly from environment
+API_KEY = os.environ["OPENAI_API_KEY"]
+MODEL = os.environ["OPENAI_MODEL"]
+
+# ✅ Initialize async client
+client = AsyncOpenAI(api_key=API_KEY)
 
 
 async def stream_response(messages, model: str = MODEL):
