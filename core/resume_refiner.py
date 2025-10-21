@@ -25,6 +25,12 @@ Rules:
 - Leave the Summary/Description section untouched.
 - Preserve LaTeX formatting, indentation, and spacing.
 - Keep the same structure, but refine it down to 1 full page.
+- Include only the 2–3 most relevant projects (omit all others).
+- Include only the most relevant work experience (omit unrelated or less relevant roles).
+- Refine the Skills section to include only the 3–4 most relevant categories,
+  and within each, list only the 2–3 most relevant skills.
+- Do not include all projects, experiences, or skills — focus only on those
+  that best match the target job description.
 """
 
 # ============================================================
