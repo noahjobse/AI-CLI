@@ -18,13 +18,13 @@ MODEL = os.environ["OPENAI_MODEL"]
 client = AsyncOpenAI(api_key=API_KEY)
 
 SYSTEM_PROMPT = """You are a professional technical resume editor.
-Refine the given LaTeX resume based on the provided job description.
+Refine the given LaTeX resume to best suit the provided job description.
 
 Rules:
 - Only reword existing content; do not add new experiences or skills.
-- Leave the Skills and Summary/Description sections untouched.
+- Leave the Summary/Description section untouched.
 - Preserve LaTeX formatting, indentation, and spacing.
-- Keep the same structure and bullet count.
+- Keep the same structure, but refine it down to 1.5 pages or less.
 """
 
 # ============================================================
