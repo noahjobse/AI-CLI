@@ -24,7 +24,7 @@ Rules:
 - Only reword existing content; do not add new experiences or skills.
 - Leave the Summary/Description section untouched.
 - Preserve LaTeX formatting, indentation, and spacing.
-- Keep the same structure, but refine it down to 1.5 pages or less.
+- Keep the same structure, but refine it down to 1 full page.
 """
 
 # ============================================================
