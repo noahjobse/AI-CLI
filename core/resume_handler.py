@@ -28,10 +28,14 @@ class ResumeHandler:
         if default_path.exists():
             self.app._resume_path = str(default_path)
             self.chat.update_assistant(f"Using default resume: {default_path.name}")
-            self.chat.update_assistant("Please paste the job description (end with Ctrl+D on a new line): ")
+            self.chat.update_assistant(
+                "Please paste the job description (end with Ctrl+D on a new line): "
+            )
             self.app._resume_input_state = "waiting_for_job_description"
         else:
-            self.chat.update_assistant("Default resume not found. Please provide a path to your LaTeX resume file:")
+            self.chat.update_assistant(
+                "Default resume not found. Please provide a path to your LaTeX resume file:"
+            )
             self.app._resume_input_state = "waiting_for_resume_path"
 
     async def process_resume_refinement(self, resume_path_str: str, job_description: str):
@@ -75,7 +79,7 @@ class ResumeHandler:
                         break
 
             # --- Finish stream cleanly ---
-            self.chat.update_assistant("\n```")
+            self.chat.update_assistant("\n```", append=True)
             self.status.toast("Resume refinement complete ✓")
 
         except Exception as e:

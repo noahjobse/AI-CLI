@@ -49,16 +49,12 @@ class ChatView(VerticalScroll):
         self.scroll_end(animate=False)
 
     def update_assistant(self, text: str, append: bool = False):
-        """Stream assistant updates into the active row."""
+        """Update or append assistant messages during streaming."""
         if not self.current_assistant_row:
             self.start_assistant()
 
-        if append:
-            # Append text chunk to the existing message
-            new_text = self.current_assistant_row.text + text
-        else:
-            # Replace the entire message
-            new_text = text
+        prev = self.current_assistant_row.text
+        new_text = (prev + text) if append else text
 
         self.current_assistant_row.update_text(new_text)
         self.last_assistant = new_text
