@@ -21,8 +21,7 @@ SYSTEM_PROMPT = """You are a professional technical resume editor.
 Refine the given LaTeX resume to best suit the provided job description.
 
 Rules:
-- Only reword existing content; do not add new experiences or skills.
-- Leave the Summary/Description section untouched.
+- Only reword existing content; do not add new bullets, only reword current ones.
 - Preserve LaTeX formatting, indentation, and spacing.
 - Keep the same structure, but refine it down to 1 full page.
 - Include only the 2–3 most relevant projects (omit all others).
