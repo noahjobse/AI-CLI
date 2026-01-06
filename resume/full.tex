@@ -1,9 +1,9 @@
 %-------------------------
-% Resume in Latex
+% Resume in LaTeX
 % Author : Noah Jobse
 % Based off of: https://github.com/sb2nov/resume
 % License : MIT
-%------------------------
+%-------------------------
 
 \documentclass[letterpaper,11pt]{article}
 
@@ -30,10 +30,10 @@
 \raggedright
 \setlength{\tabcolsep}{0in}
 
-% Sections formatting
+% Section formatting
 \titleformat{\section}{
   \vspace{-4pt}\scshape\raggedright\large
-  }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
 % Ensure ATS readable
 \pdfgentounicode=1
@@ -44,15 +44,15 @@
 
 \newcommand{\resumeSubheading}[4]{
   \vspace{-2pt}\item
-      \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-            \textbf{#1} & #2 \\
-                  \textit{\small#3} & \textit{\small #4} \\
-                      \end{tabular*}\vspace{-7pt}
-                      }
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-7pt}
+}
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.3in]}
 \newcommand{\resumeItemListEnd}{\end{itemize}}
 
 %-------------------------------------------
@@ -62,29 +62,26 @@
 
 %----------HEADING----------
 \begin{center}
-    \textbf{\Huge \scshape Noah Jobse} \\ \vspace{1pt}
-    Calgary AB \\ 
-    \small \href{mailto:noahjobse@gmail.com}{noahjobse@gmail.com} \\
-    GitHub: \href{https://github.com/noahjobse}{github.com/noahjobse} \quad
-    Portfolio: \href{https://noahjobse.vercel.app}{noahjobse.vercel.app} \quad
-    LinkedIn: \href{https://linkedin.com/in/noah-jobse}{linkedin.com/in/noah-jobse}
+  \textbf{\Huge \scshape Noah Jobse} \\ \vspace{1pt}
+  Calgary, AB \\ 
+  \small \href{mailto:noahjobse@gmail.com}{noahjobse@gmail.com} \\ 
+  GitHub: \href{https://github.com/noahjobse}{github.com/noahjobse} \quad
+  Portfolio: \href{https://noahjobse.vercel.app}{noahjobse.vercel.app} \quad
+  LinkedIn: \href{https://linkedin.com/in/noah-jobse}{linkedin.com/in/noah-jobse}
 \end{center}
 
 %-----------SUMMARY-----------
 \section{Summary}
 \small
 Curious and motivated software developer pivoting from construction leadership into full-stack development. Currently in the \textbf{3rd year} of the BTech in Software Development at SAIT, building \textbf{user-focused applications} with \textbf{React, Next.js, Python, and PostgreSQL}.
-Curious and motivated software developer pivoting from construction leadership into full-stack development. Currently in the \textbf{3rd year} of the BTech in Software Development at SAIT, building \textbf{user-focused applications} with \textbf{React, Next.js, Python, and PostgreSQL}.
 
 %-----------EDUCATION-----------
 \section{Education}
 \resumeSubHeadingListStart
   \resumeSubheading
-    {Southern Alberta Institute of Technology}{Calgary AB}
-    {Bachelor of Technology in Software Development, \textbf{GPA 3.6}}{\textbf{Expected Dec 2026}}
-    {Bachelor of Technology in Software Development, \textbf{GPA 3.6}}{\textbf{Expected Dec 2026}}
+    {Southern Alberta Institute of Technology}{Calgary, AB}
+    {Bachelor of Technology in Software Development, \textbf{GPA 3.6}}{\textbf{Expected Apr 2027}}
       \resumeItemListStart
-        \resumeItem{\textbf{Capstone Project: CloudInsights.ai — earned A+ and Academic Chair commendation.}}
         \resumeItem{\textbf{Capstone Project: CloudInsights.ai — earned A+ and Academic Chair commendation.}}
         \resumeItem{\textbf{Relevant Coursework:} Algorithms and Data Structures, Object-Oriented Design, Web Development, Database Design and Programming, Software Testing and Deployment, Software Security, Cloud Computing, Operating Systems, Emerging Trends in Software Development.}
       \resumeItemListEnd
@@ -93,15 +90,14 @@ Curious and motivated software developer pivoting from construction leadership i
 %-----------SKILLS-----------
 \section{Skills}
 \begin{itemize}[leftmargin=0.15in, label={}]\small
-\begin{itemize}[leftmargin=0.15in, label={}]\small
-  \item \textbf{Languages:} TypeScript, JavaScript, Python, Java, SQL
-  \item \textbf{Frontend:} React, Next.js, Tailwind CSS
+  \item \textbf{Languages:} TypeScript, JavaScript, Python, Java, \textbf{C\#}, SQL
+  \item \textbf{Frameworks \& Libraries:} React, Next.js, Tailwind CSS, \textbf{.NET MAUI}, Blazor, Entity Framework Core
   \item \textbf{Backend:} Node.js, Express.js, Flask, Spring Boot, REST, GraphQL
   \item \textbf{Databases:} PostgreSQL, Supabase, Firestore, MySQL, SQLite, Pinecone
-  \item \textbf{DevOps and Cloud:} Git, Docker, CI/CD, Firebase Hosting, Vercel, AWS, Azure
+  \item \textbf{DevOps \& Cloud:} Git, Docker, CI/CD, Firebase Hosting, Vercel, AWS, Azure
   \item \textbf{Testing:} Jest, Playwright, GitHub Actions, Postman
-  \item \textbf{Tools:} Jira, Trello, Teams, VS Code, IntelliJ, Figma
-  \item \textbf{AI and Data:} OpenAI SDK, LangChain, LangGraph
+  \item \textbf{Tools:} Jira, Trello, Teams, VS Code, IntelliJ, Figma, Visual Studio
+  \item \textbf{AI \& Data:} OpenAI SDK, LangChain, LangGraph
 \end{itemize}
 
 %-----------EXPERIENCE-----------
@@ -109,28 +105,40 @@ Curious and motivated software developer pivoting from construction leadership i
 \resumeSubHeadingListStart
 
 \resumeSubheading
-  {Hoodo}{\textbf{Nov--Dec 2025}}
-  {Automation/Product Intern — Hybrid, Calgary AB}{}
+  {Hoodo Technology}{Jan 2026 -- Present}
+  {Software Engineer — Product \& Platform — Hybrid, Calgary, AB}{}
   \resumeItemListStart
-    \resumeItem{Audited internal workflows across \textbf{CRM, referrals, events, and marketing} to identify \textbf{automation opportunities}.}
-    \resumeItem{Implemented automation solutions using \textbf{Zapier, n8n, and custom Python/JavaScript integrations}.}
-    \resumeItem{Designed and documented \textbf{scalable workflows} for future team use.}
-    \resumeItem{Collaborated directly with \textbf{founders} to evaluate automation approaches and streamline product operations.}
-    \resumeItem{Contributed to improving process efficiency and \textbf{reducing manual work} across multiple internal systems.}
+    \resumeItem{Returned in an expanded engineering role with increased ownership across product and platform systems}
+    \resumeItem{Independently designed, built, and deployed \textbf{Dockerized automation services} to production, improving reliability and delivery speed across core workflows}
+    \resumeItem{Own end-to-end development of product features and website improvements, driving conversion and improving overall user experience}
+    \resumeItem{Build and maintain internal tools, including a collaborative style guide application and brand invoice creator, enabling consistent cross-team execution}
+    \resumeItem{Design and operate \textbf{ETL pipelines} and operational tooling to support scaling decisions and internal visibility}
+    \resumeItem{Collaborate directly with leadership and external consultants to align technical execution with business and growth objectives}
   \resumeItemListEnd
 
 \resumeSubheading
-  {Freelance and Client Web Development}{\textbf{2025 - Present}}
-  {Hybrid — Calgary AB}{}
+  {Hoodo Technology}{Nov 2025 -- Jan 2026}
+  {Software Engineering Intern — Hybrid, Calgary, AB}{}
+  \resumeItemListStart
+    \resumeItem{Contributed to production systems early by shipping and maintaining live automation and infrastructure components}
+    \resumeItem{Executed a full website migration to a new \textbf{IaaS provider}, including frontend modernization to support future internal dashboards and applications}
+    \resumeItem{Built and deployed \textbf{Dockerized services} to cloud environments, supporting production workflows and internal operations}
+    \resumeItem{Implemented foundational infrastructure and deployment patterns used by the team beyond the internship term}
+    \resumeItem{Supported ongoing website and system improvements with a focus on performance, maintainability, and scalability}
+  \resumeItemListEnd
+
+\resumeSubheading
+  {Freelance and Client Web Development}{2025 -- Present}
+  {Hybrid — Calgary, AB}{}
   \resumeItemListStart
     \resumeItem{Achieved \textbf{100 Real Experience Score} on Vercel by optimizing images with \textbf{Next.js} and minimizing animations, reducing load times under \textbf{one second}.}
-    \resumeItem{Improved \textbf{Lighthouse metrics} through \textbf{CI/CD tracking} and performance budget tuning, maintaining consistent \textbf{90\%+ scores}.}
+    \resumeItem{Improved \textbf{Lighthouse metrics} through \textbf{CI/CD tracking} and performance tuning, maintaining consistent \textbf{90\%+ scores}.}
     \resumeItem{Delivered responsive, maintainable apps using \textbf{Next.js, Tailwind CSS, and Node.js}, enabling clients to launch faster and scale efficiently.}
   \resumeItemListEnd
 
 \resumeSubheading
-  {Beyond Group}{\textbf{2021--2022}}
-  {Calgary AB}{}
+  {Beyond Group}{2021 -- 2022}
+  {Crew Lead — Calgary, AB}{}
   \resumeItemListStart
     \resumeItem{Led crews of \textbf{two to four workers} to deliver projects at \textbf{115\% efficiency}, surpassing productivity targets.}
     \resumeItem{Reduced onboarding time by training new employees on \textbf{safety compliance and process improvements}, improving retention.}
@@ -143,10 +151,10 @@ Curious and motivated software developer pivoting from construction leadership i
 \resumeSubHeadingListStart
 
 \resumeSubheading
-  {CloudInsights.ai — Full Stack Financial Analytics}{\textbf{2025}}
+  {\textbf{CloudInsights.ai — Full Stack Financial Analytics}}{\textbf{2025}}
   {Next.js 15, TypeScript, Zustand, Zod, Jest, Playwright, Vercel, Supabase}{}
   \resumeItemListStart
-    \resumeItem{Developed a \textbf{SaaS financial analytics platform} with interactive dashboards, KPI summaries, and variance reporting.}
+    \resumeItem{Developed a \textbf{SaaS financial analytics platform} with interactive dashboards, \textbf{KPI summaries}, and variance reporting.}
     \resumeItem{Implemented an \textbf{ETL pipeline for QuickBooks Online OAuth2 data}, transforming raw business data into schema-validated profit and loss records with \textbf{Zod}.}
     \resumeItem{Optimized deployment with \textbf{Vercel caching and monitoring}, sustaining \textbf{95\%+ Lighthouse performance scores}.}
     \resumeItem{Built a \textbf{comprehensive testing suite with Jest and Playwright}, increasing coverage above \textbf{60\%}.}
@@ -157,7 +165,7 @@ Curious and motivated software developer pivoting from construction leadership i
   \resumeItemListEnd
 
 \resumeSubheading
-  {Client Web Development Projects — Freelance}{\textbf{2025}}
+  {\textbf{Client Web Development Projects — Freelance}}{\textbf{2025}}
   {Next.js, TypeScript, Tailwind, Shopify GraphQL, Firestore}{}
   \resumeItemListStart
     \resumeItem{Launched production websites with \textbf{optimized Next.js pipelines}, achieving \textbf{90\%+ Lighthouse scores} and \textbf{first-page SEO rankings}.}
@@ -169,7 +177,7 @@ Curious and motivated software developer pivoting from construction leadership i
   \resumeItemListEnd
 
 \resumeSubheading
-  {AI-CLI — Local AI Automation Tool}{\textbf{2025}}
+  {\textbf{AI-CLI — Local AI Automation Tool}}{\textbf{2025}}
   {TypeScript, Node.js, OpenAI SDK, LangChain, Shell CLI Utilities}{}
   \resumeItemListStart
     \resumeItem{Developed a \textbf{local OpenAI SDK command-line tool} with token tracking, caching, and prompt optimization.}
@@ -180,7 +188,7 @@ Curious and motivated software developer pivoting from construction leadership i
   \resumeItemListEnd
 
 \resumeSubheading
-  {RAG-CLI — AI Documentation Assistant}{\textbf{2025}}
+  {\textbf{RAG-CLI — AI Documentation Assistant}}{\textbf{2025}}
   {TypeScript, Node.js, LangChain, LangGraph, Pinecone, OpenAI SDK}{}
   \resumeItemListStart
     \resumeItem{Engineered a \textbf{modular RAG CLI} integrating \textbf{LangChain, LangGraph, and GPT-4o mini} for structured retrieval and generation.}
@@ -191,7 +199,7 @@ Curious and motivated software developer pivoting from construction leadership i
   \resumeItemListEnd
 
 \resumeSubheading
-  {Python Automation Projects}{\textbf{2024--2025}}
+  {\textbf{Python Automation Projects}}{\textbf{2024--2025}}
   {Python, Pandas, APIs, Web Scraping, OpenAI}{}
   \resumeItemListStart
     \resumeItem{Developed \textbf{Contact Enrichment Automation} using Google Custom Search API and GPT to extract and update Excel datasets.}
@@ -200,5 +208,17 @@ Curious and motivated software developer pivoting from construction leadership i
     \resumeItem{Designed a \textbf{Semi-Automated Contact Entry Tool} with CLI-based prompts for incremental Excel updates.}
   \resumeItemListEnd
 
+\resumeSubheading
+  {\textbf{Restaurant Management System — Great Burger}}{\textbf{2024}}
+  {C\#, .NET MAUI, Blazor, SQL, Entity Framework Core, Bootstrap}{}
+  \resumeItemListStart
+    \resumeItem{Developed a full-stack \textbf{restaurant management system} enabling order, menu, inventory, and employee management for the client “Great Burger.”}
+    \resumeItem{Implemented \textbf{three management modules} — Orders, Inventory, and Employees — with full CRUD functionality and persistent storage using \textbf{Entity Framework Core}.}
+    \resumeItem{Built a \textbf{modern MAUI/Blazor GUI} for desktop deployment with responsive layouts and consistent navigation flow.}
+    \resumeItem{Designed and connected \textbf{SQL database models} to maintain real-time updates for order history, menu pricing, and staff records.}
+    \resumeItem{Collaborated in a four-person team (Mostapha, Jacob, Noah, Anton) to deliver a fully functional project for the \textbf{Object-Oriented Programming II} course at SAIT.}
+  \resumeItemListEnd
+
 \resumeSubHeadingListEnd
+
 \end{document}
